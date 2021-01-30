@@ -71,7 +71,7 @@ dockers:
       - --label=org.opencontainers.image.revision={{ .FullCommit }}
       - --label=org.opencontainers.image.licenses="Apache 2.0"
   - image_templates: ["habakke/router:{{ .Version }}-arm64v8"]
-    ids: [router]
+    binaries: [router]
     goos: linux
     goarch: arm64
     dockerfile: Dockerfile
@@ -90,7 +90,7 @@ dockers:
       - --label=org.opencontainers.image.revision={{ .FullCommit }}
       - --label=org.opencontainers.image.licenses="Apache 2.0"
   - image_templates: ["habakke/router:{{ .Version }}-386"]
-    ids: [router]
+    binaries: [router]
     goos: linux
     goarch: '386'
     dockerfile: Dockerfile
@@ -109,7 +109,7 @@ dockers:
       - --label=org.opencontainers.image.revision={{ .FullCommit }}
       - --label=org.opencontainers.image.licenses="Apache 2.0"
   - image_templates: ["habakke/router:{{ .Version }}-armv7"]
-    ids: [router]
+    binaries: [router]
     goos: linux
     goarch: arm
     dockerfile: Dockerfile
