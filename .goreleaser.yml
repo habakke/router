@@ -92,7 +92,7 @@ dockers:
   - image_templates: ["habakke/router:{{ .Version }}-386"]
     ids: [router]
     goos: linux
-    goarch: 386
+    goarch: '386'
     dockerfile: Dockerfile
     use_buildx: true
     extra_files:
