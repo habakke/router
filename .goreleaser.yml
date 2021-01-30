@@ -52,7 +52,8 @@ signs:
       - "${artifact}"
 dockers:
   - image_templates: ["habakke/router:{{ .Version }}-amd64"]
-    binaries: [router]
+    ids: [router]
+    goos: linux
     goarch: amd64
     dockerfile: Dockerfile
     use_buildx: true
@@ -70,8 +71,47 @@ dockers:
       - --label=org.opencontainers.image.revision={{ .FullCommit }}
       - --label=org.opencontainers.image.licenses="Apache 2.0"
   - image_templates: ["habakke/router:{{ .Version }}-arm64v8"]
-    binaries: [router]
+    ids: [router]
+    goos: linux
     goarch: arm64
+    dockerfile: Dockerfile
+    use_buildx: true
+    extra_files:
+      - conf/app.toml
+      - conf/log.xml
+    build_flag_templates:
+      - --platform=linux/arm64/v8
+      - --label=org.opencontainers.image.title={{ .ProjectName }}
+      - --label=org.opencontainers.image.description={{ .ProjectName }}
+      - --label=org.opencontainers.image.url=https://github.com/habakke/router
+      - --label=org.opencontainers.image.source=https://github.com/habakke/router
+      - --label=org.opencontainers.image.version={{ .Version }}
+      - --label=org.opencontainers.image.created={{ time "2006-01-02T15:04:05Z07:00" }}
+      - --label=org.opencontainers.image.revision={{ .FullCommit }}
+      - --label=org.opencontainers.image.licenses="Apache 2.0"
+  - image_templates: ["habakke/router:{{ .Version }}-386"]
+    ids: [router]
+    goos: linux
+    goarch: 386
+    dockerfile: Dockerfile
+    use_buildx: true
+    extra_files:
+      - conf/app.toml
+      - conf/log.xml
+    build_flag_templates:
+      - --platform=linux/arm64/v8
+      - --label=org.opencontainers.image.title={{ .ProjectName }}
+      - --label=org.opencontainers.image.description={{ .ProjectName }}
+      - --label=org.opencontainers.image.url=https://github.com/habakke/router
+      - --label=org.opencontainers.image.source=https://github.com/habakke/router
+      - --label=org.opencontainers.image.version={{ .Version }}
+      - --label=org.opencontainers.image.created={{ time "2006-01-02T15:04:05Z07:00" }}
+      - --label=org.opencontainers.image.revision={{ .FullCommit }}
+      - --label=org.opencontainers.image.licenses="Apache 2.0"
+  - image_templates: ["habakke/router:{{ .Version }}-armv7"]
+    ids: [router]
+    goos: linux
+    goarch: arm
     dockerfile: Dockerfile
     use_buildx: true
     extra_files:
@@ -92,6 +132,8 @@ docker_manifests:
     image_templates:
       - habakke/router:{{ .Version }}-amd64
       - habakke/router:{{ .Version }}-arm64v8
+      - habakke/router:{{ .Version }}-386
+      - habakke/router:{{ .Version }}-armv7
 release:
 # If you want to manually examine the release before its live, uncomment this line:
 # draft: true

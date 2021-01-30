@@ -33,5 +33,6 @@ jobs:
           version: latest
           args: release --rm-dist
         env:
+          DOCKER_CLI_EXPERIMENTAL: enabled
           GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
