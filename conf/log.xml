@@ -2,9 +2,9 @@
 
 <seelog> 
   <outputs formatid="main"> 
-  <filter levels="info,debug,error,critical">
+  <!--filter levels="info,debug,error,critical">
         <rollingfile type="size" filename="./log/router.log" maxsize="102400000" maxrolls="3650"/>
-  </filter>
+  </filter-->
   <console/>
   </outputs>  
   <formats> 
