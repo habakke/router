@@ -15,7 +15,7 @@ builds:
     flags:
       - -trimpath
     ldflags:
-      - '-s -w -X util.version={{ .Version }} -X util.commit={{ .Branch }}@{{ .Commit }} -X util.date={{ .Date }} -X util.builtBy=CI'
+      - '-s -w -X util.version={{ .Version }} -X util.commit={{ .Branch }}@{{ .ShortCommit }} -X util.date={{ .Date }} -X util.builtBy=CI'
     goos:
       - freebsd
       - windows
@@ -73,7 +73,7 @@ dockers:
       - --label=org.opencontainers.image.revision={{ .FullCommit }}
       - --label=org.opencontainers.image.licenses="Apache 2.0"
   - image_templates: ["habakke/router:{{ .Version }}-arm64v8"]
-    binaries: [router]
+    ids: [router]
     goos: linux
     goarch: arm64
     dockerfile: Dockerfile
@@ -92,7 +92,7 @@ dockers:
       - --label=org.opencontainers.image.revision={{ .FullCommit }}
       - --label=org.opencontainers.image.licenses="Apache 2.0"
   - image_templates: ["habakke/router:{{ .Version }}-386"]
-    binaries: [router]
+    ids: [router]
     goos: linux
     goarch: '386'
     dockerfile: Dockerfile
@@ -111,7 +111,7 @@ dockers:
       - --label=org.opencontainers.image.revision={{ .FullCommit }}
       - --label=org.opencontainers.image.licenses="Apache 2.0"
   - image_templates: ["habakke/router:{{ .Version }}-armv7"]
-    binaries: [router]
+    ids: [router]
     goos: linux
     goarch: arm
     goarm: '7'
@@ -132,6 +132,24 @@ dockers:
       - --label=org.opencontainers.image.licenses="Apache 2.0"
 docker_manifests:
   - name_template: habakke/router:{{ .Version }}
+    image_templates:
+      - habakke/router:{{ .Version }}-amd64
+      - habakke/router:{{ .Version }}-arm64v8
+      - habakke/router:{{ .Version }}-386
+      - habakke/router:{{ .Version }}-armv7
+  - name_template: habakke/router:latest
+    image_templates:
+      - habakke/router:{{ .Version }}-amd64
+      - habakke/router:{{ .Version }}-arm64v8
+      - habakke/router:{{ .Version }}-386
+      - habakke/router:{{ .Version }}-armv7
+  - name_template: habakke/router:{{ .Major }}
+    image_templates:
+      - habakke/router:{{ .Version }}-amd64
+      - habakke/router:{{ .Version }}-arm64v8
+      - habakke/router:{{ .Version }}-386
+      - habakke/router:{{ .Version }}-armv7
+  - name_template: habakke/router:{{ .Major }}.{{ .Minor }}
     image_templates:
       - habakke/router:{{ .Version }}-amd64
       - habakke/router:{{ .Version }}-arm64v8
