@@ -53,6 +53,7 @@ signs:
 dockers:
   - image_templates: ["habakke/router:{{ .Version }}-amd64"]
     binaries: [router]
+    goarch: amd64
     dockerfile: Dockerfile
     use_buildx: true
     extra_files:
