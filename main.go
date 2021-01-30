@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/fhmq/router/server"
+	"fmt"
+	"github.com/habakke/router/server"
 
 	log "github.com/cihub/seelog"
 	"github.com/spf13/viper"
@@ -11,6 +12,17 @@ const (
 	CONFIG_FILE_NAME     = "./conf/app.toml"
 	LOG_CONFIG_FILE_NAME = "./conf/log.xml"
 )
+
+var (
+	version   string // build version number
+	commit    string // sha1 revision used to build the program
+	buildTime string // when the executable was built
+	buildBy   string
+)
+
+func GetVersionString(name string) string {
+	return fmt.Sprintf("%s %s (%s at %s by %s)", name, version, commit, buildTime, buildBy)
+}
 
 func init() {
 	viper.Reset()
@@ -28,6 +40,8 @@ func init() {
 
 }
 func main() {
+	fmt.Println(GetVersionString("router"))
+
 	port := viper.GetString("service.port")
 	topic := "broker000100101info"
 	srv := server.NewServer(port, topic)
